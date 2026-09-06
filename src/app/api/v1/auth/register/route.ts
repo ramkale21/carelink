@@ -13,7 +13,7 @@ export async function POST(req: NextRequest) {
         "VALIDATION_ERROR",
         "Invalid input fields",
         400,
-        validation.error.flatten().fieldErrors
+        validation.error.flatten().fieldErrors,
       );
     }
 
@@ -31,7 +31,8 @@ export async function POST(req: NextRequest) {
 
     return response;
   } catch (error: any) {
-    const message = error?.message || "An unexpected error occurred during registration";
+    const message =
+      error?.message || "An unexpected error occurred during registration";
     if (message.startsWith("PHONE_EXISTS")) {
       return apiError("PHONE_EXISTS", message, 409);
     }
